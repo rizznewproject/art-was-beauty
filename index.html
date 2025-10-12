@@ -4,46 +4,321 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aty.life - Art was Beauty</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <style>
-        body { font-family: sans-serif; text-align: center; margin: 40px; }
-        h1, h2 { color: #c84a7d; }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            background-color: #c84a7d;
-            color: white;
+        :root {
+            --primary: #c84a7d;
+            --gradient: linear-gradient(90deg, #c84a7d 0%, #6c63ff 100%);
+            --bg: #191825;
+            --card-bg: #22223a;
+            --text: #fff;
+            --accent: #6c63ff;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+        }
+        header {
+            padding: 60px 20px 40px 20px;
+            background: var(--gradient);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        header::after {
+            content: "";
+            position: absolute;
+            right: -80px; top: -80px;
+            width: 180px; height: 180px;
+            background: #fff1;
+            border-radius: 50%;
+            z-index: 0;
+        }
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--card-bg);
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            padding: 12px 0;
+            z-index: 10;
+        }
+        nav a {
+            color: var(--primary);
             text-decoration: none;
-            border-radius: 5px;
+            font-weight: 500;
+            transition: color .2s;
+        }
+        nav a:hover { color: var(--accent);}
+        .title-main {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0;
+            letter-spacing: 2px;
+        }
+        .subtitle { font-size: 1.6rem; font-weight: 500; margin-top: 0;}
+        .hero-desc { font-size: 1.2rem; margin: 16px 0 32px;}
+        .cta-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            margin: 12px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background .2s;
+            box-shadow: 0 4px 16px #0002;
+        }
+        .cta-btn:hover { background: var(--primary);}
+        .socials {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+        }
+        .socials a {
+            color: #fff;
+            background: var(--accent);
+            border-radius: 50%;
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+        }
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        section {
+            margin-bottom: 60px;
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 32px 24px;
+            box-shadow: 0 4px 40px #0002;
+        }
+        section h2 {
+            color: var(--accent);
+            font-size: 2rem;
+            margin-top: 0;
+        }
+        .produk-list, .makeup-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+        }
+        .produk-card, .makeup-card {
+            background: #29294a;
+            border-radius: 12px;
+            padding: 24px;
+            min-width: 220px;
+            max-width: 320px;
+            text-align: left;
+            box-shadow: 0 2px 12px #0001;
+            transition: transform .2s;
+        }
+        .produk-card:hover, .makeup-card:hover { transform: scale(1.04);}
+        .produk-card img, .makeup-card img {
+            width: 100%; height: 160px; object-fit: cover; border-radius: 8px;
+            margin-bottom: 14px;
+        }
+        .galeri-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .galeri-img {
+            border-radius: 12px;
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            cursor: pointer;
+            box-shadow: 0 2px 16px #0003;
+            transition: transform .2s;
+        }
+        .galeri-img:hover { transform: scale(1.05);}
+        .testimoni {
+            background: #23234a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .order-form {
+            margin-top: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: #22223a;
+            padding: 24px;
+            border-radius: 12px;
+            max-width: 400px;
+        }
+        .order-form input, .order-form textarea {
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            font-size: 1rem;
+        }
+        .order-form button {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .order-form button:hover { background: var(--accent);}
+        @media (max-width: 700px) {
+            .produk-list, .makeup-list { flex-direction: column; align-items: center;}
+            main { padding: 16px;}
+            section { padding: 16px 8px;}
+            .title-main { font-size: 2.3rem;}
         }
     </style>
 </head>
 <body>
-
     <header>
-        <h1>Aty.life</h1>
-        <h2>Art was beaTY</h2>
-        <p>Karya Kreatif untuk Momen Spesialmu</p>
-        <a href="#produk" class="button">Lihat Produk</a>
-        <a href="https://wa.me/+6281775092196" class="button">Pesan via WhatsApp</a>
+        <h1 class="title-main" data-aos="fade-down">Aty.life</h1>
+        <h2 class="subtitle" data-aos="fade-down" data-aos-delay="100">Art was beaTY</h2>
+        <p class="hero-desc" data-aos="fade-down" data-aos-delay="200">Karya Kreatif untuk Momen Spesialmu</p>
+        <a href="#produk" class="cta-btn" data-aos="fade-up" data-aos-delay="300">Lihat Produk</a>
+        <a href="#order" class="cta-btn" data-aos="fade-up" data-aos-delay="400">Pemesanan</a>
+        <div class="socials" data-aos="fade-up" data-aos-delay="500">
+            <a href="https://wa.me/+6281775092196" title="WhatsApp"><span>📱</span></a>
+            <a href="https://instagram.com/" title="Instagram"><span>🌈</span></a>
+            <a href="mailto:hello@aty.life" title="Email"><span>✉️</span></a>
+        </div>
     </header>
-
+    <nav>
+        <a href="#produk">Produk</a>
+        <a href="#makeup">Make Up</a>
+        <a href="#galeri">Galeri</a>
+        <a href="#order">Order</a>
+    </nav>
     <main>
-        <section id="produk">
+        <section id="produk" data-aos="fade-up">
             <h2>Produk Kerajinan</h2>
-            <p>Hiasan Kepala, Aksesoris, Fashion Custom akan ditampilkan di sini.</p>
+            <div class="produk-list">
+                <div class="produk-card">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Hiasan Kepala">
+                    <h3>Hiasan Kepala</h3>
+                    <p>Hiasan kepala elegan untuk berbagai acara, bisa custom sesuai keinginanmu.</p>
+                </div>
+                <div class="produk-card">
+                    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Aksesoris Fashion">
+                    <h3>Aksesoris Fashion</h3>
+                    <p>Aksesoris unik & stylish, terbuat dari bahan premium.</p>
+                </div>
+                <div class="produk-card">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Custom Fashion">
+                    <h3>Fashion Custom</h3>
+                    <p>Desain fashion custom untuk tampil beda di setiap momen spesial.</p>
+                </div>
+            </div>
         </section>
 
-        <section id="makeup">
+        <section id="makeup" data-aos="fade-up">
             <h2>Jasa Make Up</h2>
-            <p>Layanan Make Up untuk Wisuda, Engagement, dan Karnaval akan ditampilkan di sini.</p>
+            <div class="makeup-list">
+                <div class="makeup-card">
+                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Make Up Wisuda">
+                    <h3>Wisuda</h3>
+                    <p>Make Up natural & glowing untuk hari wisudamu yang spesial.</p>
+                </div>
+                <div class="makeup-card">
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Make Up Engagement">
+                    <h3>Engagement</h3>
+                    <p>Tampilan flawless & memukau untuk engagement, prewedding, dll.</p>
+                </div>
+                <div class="makeup-card">
+                    <img src="https://images.unsplash.com/photo-1512250739093-2b1e4e49b8a0?auto=format&fit=crop&w=400&q=80" alt="Make Up Karnaval">
+                    <h3>Karnaval</h3>
+                    <p>Make Up karakter/karnaval sesuai tema acara, full kreatifitas!</p>
+                </div>
+            </div>
         </section>
 
-        <section id="galeri">
+        <section id="galeri" data-aos="fade-up">
             <h2>Galeri & Testimoni</h2>
-            <p>Foto-foto hasil karya dan testimoni pelanggan akan ada di sini.</p>
+            <div class="galeri-grid">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Karya 1" class="galeri-img" title="Karya 1">
+                <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Karya 2" class="galeri-img" title="Karya 2">
+                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Karya 3" class="galeri-img" title="Karya 3">
+                <img src="https://images.unsplash.com/photo-1512250739093-2b1e4e49b8a0?auto=format&fit=crop&w=400&q=80" alt="Karya 4" class="galeri-img" title="Karya 4">
+            </div>
+            <div class="testimoni" data-aos="fade-right">
+                <h3 style="margin-top:0;">Testimoni Pelanggan</h3>
+                <p>⭐⭐⭐⭐⭐ <br> "Hasilnya sangat memuaskan, detail dan kreatif! Pesan produk & make up di Aty.life selalu jadi pilihan utama." <br> - Bella</p>
+                <p>⭐⭐⭐⭐⭐ <br> "Pelayanan ramah, hasil make up glowing dan awet, hiasan kepala juga cantik banget. Recommended!" <br> - Rina</p>
+            </div>
+        </section>
+
+        <section id="order" data-aos="fade-up">
+            <h2>Form Pemesanan</h2>
+            <form class="order-form" id="orderForm">
+                <input type="text" name="nama" placeholder="Nama Lengkap" required>
+                <input type="tel" name="telp" placeholder="No. Telp / WhatsApp" required>
+                <input type="email" name="email" placeholder="Email (optional)">
+                <textarea name="pesan" rows="3" placeholder="Pesanan / Keperluan" required></textarea>
+                <button type="submit">Kirim Pesanan</button>
+            </form>
+            <p id="orderMsg" style="margin-top:16px; color:var(--accent); font-weight:500;"></p>
         </section>
     </main>
+    <footer style="text-align:center; color:#aaa; padding:32px 0;">
+        &copy; 2025 Aty.life - Art was Beauty. All rights reserved.
+    </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 900, once: true });
 
+        // Smooth scroll for nav links
+        document.querySelectorAll('nav a, .cta-btn').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = link.getAttribute('href');
+                if(href.startsWith('#')) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Simple form handler (no backend, only show message)
+        document.getElementById('orderForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            document.getElementById('orderMsg').textContent =
+                'Terima kasih! Pesanan Anda telah kami terima. Kami akan segera menghubungi Anda.';
+            document.getElementById('orderForm').reset();
+        });
+
+        // Galeri pop up preview (simple)
+        document.querySelectorAll('.galeri-img').forEach(img => {
+            img.addEventListener('click', function() {
+                const src = img.src;
+                const overlay = document.createElement('div');
+                overlay.style.position = 'fixed';
+                overlay.style.top = '0'; overlay.style.left = '0';
+                overlay.style.width = '100vw'; overlay.style.height = '100vh';
+                overlay.style.background = '#000a';
+                overlay.style.display = 'flex'; overlay.style.alignItems = 'center'; overlay.style.justifyContent = 'center';
+                overlay.style.zIndex = '1000';
+                overlay.innerHTML = `<img src="${src}" style="max-width:80vw; max-height:80vh; border-radius:18px; box-shadow: 0 8px 50px #0008;">
+                                     <span style="position:absolute;top:36px;right:48px;font-size:2.8rem;color:#fff;cursor:pointer;">&times;</span>`;
+                overlay.onclick = () => document.body.removeChild(overlay);
+                document.body.appendChild(overlay);
+            });
+        });
+    </script>
 </body>
-</html>
+    </html>
